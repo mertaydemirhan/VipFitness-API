@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>VipFitness_Management_API</RootNamespace>
+    <UserSecretsId>910a63cb-f3a6-4d80-9e68-59fc6f74c28b</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.202.11" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.201.27" />
+    <PackageReference Include="AWSSDKCPP-SecretsManager" Version="1.6.20171017.25" />
+    <PackageReference Include="Dapper" Version="2.0.151" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+</Project>

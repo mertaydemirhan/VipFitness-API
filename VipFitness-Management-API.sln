@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VipFitness-Management-API", "VipFitness-Management-API\VipFitness-Management-API.csproj", "{AA1FFF1A-4D57-4A2F-89C1-DDF53374F12B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA1FFF1A-4D57-4A2F-89C1-DDF53374F12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA1FFF1A-4D57-4A2F-89C1-DDF53374F12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA1FFF1A-4D57-4A2F-89C1-DDF53374F12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA1FFF1A-4D57-4A2F-89C1-DDF53374F12B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCA066FF-4318-4790-A65D-036F5BCD3C34}
+	EndGlobalSection
+EndGlobal
