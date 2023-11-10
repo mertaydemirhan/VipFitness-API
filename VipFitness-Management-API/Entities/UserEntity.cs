@@ -4,6 +4,9 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
 using Azure.Core;
+using System.Text;
+using System.Security.Cryptography;
+using System.Reflection;
 
 namespace VipFitness_Management_API.Entities
 {
@@ -23,15 +26,29 @@ namespace VipFitness_Management_API.Entities
         //   conn = myConn.SendConnStr(); // Bağlantı dizesini kullan
         //}
 
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
 
+        public static bool VerifyPassword(string inputPassword, string hashedPassword)
+        {
+            string hashedInput = HashPassword(inputPassword);
+            return string.Equals(hashedInput, hashedPassword, StringComparison.OrdinalIgnoreCase);
+        }
 
         public int UserCheck(string username, string password) // Login kontrolü buradan dönecek.
         {
             //UseMyConn();
             SqlConnection sqlConnection = new SqlConnection(conn);
             sqlConnection.ConnectionString = conn;
+            string hashedPassword = HashPassword(password);
             var query = "SELECT COUNT(*) FROM tblUsers WHERE username = @Username AND password = @Password";
-            var parameters = new { Username = username, Password = password };
+            var parameters = new { Username = username, Password = hashedPassword };
             var get = sqlConnection.ExecuteScalar<int>(query, parameters);
             return get;
         }
@@ -65,7 +82,8 @@ namespace VipFitness_Management_API.Entities
             //UseMyConn();
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = conn;
-            var query = $"INSERT INTO tblUsers(username,password,UType,isdeleted) VALUES('{user.username}','{user.password}',{user.UType},{user.isdeleted})";
+            string hashedPassword = HashPassword(user.password);
+            var query = $"INSERT INTO tblUsers(username,password,UType,isdeleted) VALUES('{user.username}','{hashedPassword}',{user.UType},{user.isdeleted})";
             sqlConnection.Query<User>(query);
             return "Başarıyla Eklenmiştir.";
         }
@@ -74,7 +92,8 @@ namespace VipFitness_Management_API.Entities
             //UseMyConn();
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = conn;
-            var query = $"Update tblUsers Set username='{user.username}',password='{user.password}',UType={user.UType},isdeleted={user.isdeleted} WHERE id={id}";
+            string hashedPassword = HashPassword(user.password);
+            var query = $"Update tblUsers Set username='{user.username}',password='{hashedPassword}',UType={user.UType},isdeleted={user.isdeleted} WHERE id={id}";
             sqlConnection.ExecuteScalar<UserEntity>(query);
             return "Başarıyla Değiştirilmiştir.";
         }
